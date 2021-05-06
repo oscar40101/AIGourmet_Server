@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--導入bootstrap-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&family=Playfair+Display&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&family=Playfair+Display:wght@500&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&family=Playfair+Display:wght@500&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap');
+    </style>
+    <title>AI Gourmet</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #body {
+           
+            width: 100%;
+            margin: auto;
+          /*  background-color: #F0F0F0;*/
+            text-align: center;
+        }
+ 
+   
+        header {
+            background-color: white;
+            width: 100%;
+            height: 10vh;
+            /*佔body(父元素)25%，用vh不用%是因為上面有browser的工具列*/
+            text-align: center;
+        }
+
+        .relative {
+            position: relative;
+        }
+        /* 相對位置放在父元素*/
+        .absolute1 {
+            position: absolute;
+            /*   絕對位置放在子元素*/
+            top: 50%;
+            left: 5%;
+            /*用左上頂點當作移動的軸心*/
+            transform: translate(0, -50%)
+            /*調整軸心至整個物件的中點*/
+        }
+
+        .absolute2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        .absolute3 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            padding-top: 10px;
+        }
+        .img {
+            width: 100%;
+            margin: auto;
+            background-color: #F0F0F0;
+            background-image: url("static/background.jpg");
+            background-attachment: scroll;
+            background-size:100%;
+            text-align: center;
+        }
+        .bg {
+            width: 100%;
+            margin: auto;
+            background-color: #F0F0F0;
+           /* background-image: url("static/background.jpg");
+            background-attachment: scroll;*/
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="body">
+        <header>
+            <!--navigation bar-->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">AI Gourmet</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="">
+                                <a href="/about">
+                                    About Us
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li><a href="/upload">Upload Here</a></li>
+                            <li class="">
+                                <a href="/webcam">
+                                    Web Cam
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        </ul>
+
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+        
+        <div class="bg">
+
+            <div class="img">
+                <figure>
+                    <img src="static/hp.jpg" width="1000" />
+                </figure>
+            </div>
+
+        </div>
+    </div>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        
+        // 出現預覽圖
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgPreview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#image").change(function () {
+            readURL(this);
+        });
+        //------------------- 
+
+        $('#upload-file-btn').click(function () {
+            var form_data = new FormData($('#upload-file')[0]);
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:7777/predict',
+                data: form_data,
+                contentType: false,
+                //cache: false,
+                processData: false,
+            }).done(function (result) {
+                var str = "";
+                $.each(result["predictions"], function (index, predict) {
+                    str += "<p>" + index + ". " + predict.label + " : " + Math.round(predict.probability * 100) + "%</p>";
+                });
+                //HTML標籤字串<p>表示
+                $("#jsonOutput").html(str);
+            }).fail(function (err) {
+                alert(err.statusText);
+            });
+        });
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--導入bootstrap-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&family=Playfair+Display&display=swap');
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script> -->
+    <title>AI Gourmet</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* .test {
+            border:2px solid black;
+        } */
+
+
+        #body {
+            width: 70%;
+            margin: auto;
+            /*  background-color: #F0F0F0;*/
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Times New Roman';
+            font-weight: bold;
+            font-size: 40px;
+            color: white;
+            line-height: 20vh;
+        }
+
+        header {
+            background-color: whitesmoke;
+            width: 100%;
+            height: 10vh;
+            /*佔body(父元素)25%，用vh不用%是因為上面有browser的工具列*/
+            text-align: center;
+        }
+
+        .upload {
+            /*background-color: lightpink;*/
+            width: 50%;
+            height: 10vh;
+            float: left;
+        }
+
+        .submit {
+            /*background-color: violet;*/
+            width: 50%;
+            height: 10vh;
+            float: right;
+        }
+
+        article {
+            background-color: white;
+            width: 50%;
+            height: 90vh;
+            float: left;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            /* font-size: x-large; */
+            display: flex;
+            align-items: center;
+        }
+
+        aside {
+            background-color: #d6f5d6;
+            width: 50%;
+            height: 90vh;
+            float: right;
+            font-size: 70px;
+            color: white;
+        }
+
+        figure {
+            width: 100%;
+            height: 70vh;
+        }
+
+        .fig1 {
+            width: 400px;
+        }
+
+        .subtitle {
+            text-align: center;
+            /* padding-top: 3px; */
+            /* font-family: 'Noto Sans TC', sans-serif;
+            font-size: 15px; */
+            text-align: left;
+            width: 100%;
+            height: 20vh;
+            line-height: 20vh;
+        }
+
+        .font {
+            padding-left: 50px;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 50px;
+        }
+
+        .story {
+            line-height: 60px;
+            width: 100%;
+            height: 30vh;
+            font-size: 30px;
+
+        }
+
+        .jsonOutput {
+            /* background-color: pink; */
+            float: left;
+            width: 100%;
+            height: 30vh;
+        }
+
+        .output_label {
+            float: left;
+            background-color: pink;
+            width: 100%;
+            height: 20vh;
+            border: 2px solid black;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        /* 相對位置放在父元素*/
+        .absolute1 {
+            position: absolute;
+            /*   絕對位置放在子元素*/
+            top: 50%;
+            left: 5%;
+            /*用左上頂點當作移動的軸心*/
+            transform: translate(0, -50%)
+                /*調整軸心至整個物件的中點*/
+        }
+
+        .absolute2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        .absolute3 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            padding-top: 10px;
+        }
+    </style>
+    <script>
+        function submit(){
+            var fruit = [];
+            //.prop(name) 取得屬性值
+            //$("#input1").val();//獲取 value值
+            //$("#input1").val("Single2"); //設定 value值
+            //$("p").text();///讀取 所有段落的文字內容
+            //$("p").text("abcdefg");///設定 所有段落的文字內容為abcdefg
+            //$("div").html();//讀取第一個div中所包含的所有內容
+            //$("div").html("<p>abcdefg<p>");//設定第一個div中所包含的所有內容
+            if ($("#one-checkbox").prop("checked")) { // 回傳布林值
+                fruit += " " + $("#one-checkbox").val();
+            }
+            if ($("#two-checkbox").prop("checked")) { // 回傳布林值
+                fruit += " " + $("#two-checkbox").val();
+            }
+
+            if (fruit.length < 1) {
+                    fruit = "你沒選";
+                };
+            alert((fruit.split(" "))[1]);
+
+                $.ajax({
+                    type: 'POST', //說明請求的型態
+                    url: 'http://localhost:8080/search', //伺服器網址
+                    data: form_data,
+                    //傳送到Server的資料，要求為Object或String型別的引數。如果已經不是字串，將自動轉換為字串格式 
+                    //物件必須為key/value格式
+                    
+                    contentType: false,
+                    //contentType 
+                    //contentType是網頁要送到Server的資料型態，
+                    //若沒指定則預設為'application/x-www-form-urlencoded; charset=UTF-8'
+
+                    //dataType
+                    //dataType是網頁預期從Server接收的資料型態，
+                    //若沒指定則jQuery會根據response的MIME type來推定為xml, json, script, html, text。
+
+                    //cache: false,
+                    //要求為Boolean型別的引數，預設為true（當dataType為script時，預設為false），
+                    //設定為false將不會從瀏覽器快取中載入請求資訊。
+
+                    processData: false,
+                    //要求為Boolean型別的引數，預設為true。
+                    //預設情況下，傳送的資料將被轉換為物件（從技術角度來講並非字串）
+                    //以配合預設內容型別”application/x-www-form-urlencoded”。
+                    //如果要傳送DOM樹資訊或者其他不希望轉換的資訊，請設定為false。
+
+                    //https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/46600/#outline__4
+
+                    //.done()表示$.ajax()如果執行成功，則執行.done()，funtion(result) 中的result 為返回结果
+                }).done(function (result) {
+                    var first_label = result[0]; // apple
+                    var second_label = result[1]; // banana
+
+                    var checkbox_label = `<input id="one-checkbox" type="checkbox" value="${first_label}"/>${first_label}`;
+                    var checkbox_label2 = `<input id="two-checkbox" type="checkbox" value="${second_label}"/>${second_label}`;
+                    var button_submit = `<button id="button_submit" onclick="submit()" >送出</button>`;
+
+                    // var first_label_output = "<p><a href=/result>"+ first_label +"</a></p>";
+                    // var second_label_output = "<p><a href=/result>"+ second_label +"</a></p>";
+                    // var third_label_output = "<p><a href=/result>"+ third_label +"</a></p>";
+                    // $.each(result["first_label"], function (index, predict) {
+                    //     str += "<p>" + index + ". " + predict.label + " : " + Math.round(predict.probability * 100) + "%</p>";
+                    // });
+                    $("#label_options").html(checkbox_label);
+                    $("#label_options").append(checkbox_label2);
+                    $("#label_options").append(button_submit);
+                }).fail(function (err) {
+                    alert(err.statusText);
+                });
+        };
+
+        
+
+    </script>
+</head>
+
+<body>
+    <div id="body" class="test">
+        <header>
+            <!--navigation bar-->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">AI Gourmet</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/about">About Us<span class="sr-only">(current)</span></a></li>
+                            <li><a href="/upload">Upload Here</a></li>
+                        </ul>
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+
+        <header id="header">
+            <form id="upload-file" method="post" enctype="multipart/form-data">
+                <div id="" class="upload relative">
+                    <!--兩個class中間是用space來區分; 1. upload  2. relative-->
+                    <input id="image" name="image" class="image absolute1 test" type="file" />
+                    <!--上傳檔案使用 "input" and "file"="選擇檔案"-->
+                </div>
+            </form>
+            <div id="" class="submit relative">
+                <button id="upload-file-btn" type="button" class="btn btn-success absolute2 test">UPLOAD HERE</button>
+                <!--"btn btn-success=bootstrap"-->
+            </div>
+        </header>
+        <article class="test">
+            <p class="story">What's left in your fridge?<br>Aren't you running out of ideas what you're going to
+                cook?<br>Then show us some pics and we will customize a meal for you!</p>
+        </article>
+        <!--article也是division-->
+        <aside class="test">
+            <figure class="test relative">
+                <img id="imgPreview" class="fig1 absolute2 img-fluid" src="static/sandwich.jpg" />
+            </figure>
+            <div class="subtitle test">
+                <p class="font">AI Gourmet</p>
+            </div>
+        </aside>
+        <!--the id has to refer to javascript-->
+        <div id="jsonOutput" class="jsonOutput">
+            <div id="label_options" class="output_label"></div>
+        </div>
+        <!--aside也是division-->
+    </div>
+
+    <script>
+        // 出現預覽圖
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgPreview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#image").change(function () {
+            readURL(this);
+        });
+        //-------------------
+
+        // 將圖片上傳分析 回傳json改成網頁標籤
+        $('#upload-file-btn').click(function () {
+            var form_data = new FormData($('#upload-file')[0]);
+            //FormData 介面可為表單資料中的欄位/值建立相對應的的鍵/值對（key/value）集合，
+            //之後便可使用 XMLHttpRequest.send() 方法來送出資料。
+            //它在編碼類型設定為 multipart/form-data 時會採用與表單相同的格式送出
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/detect',
+                data: form_data,
+                //傳送到Server的資料
+                //物件必須為key/value格式
+                contentType: false,
+                //cache: false,
+                processData: false,
+                //.done()表示$.ajax()如果執行成功，則執行.done()，funtion(result) 中的result 為返回结果
+            }).done(function (result) {
+                var first_label = result[0]; // apple
+                var second_label = result[1]; // banana
+
+                var checkbox_label = `<input id="one-checkbox" type="checkbox" value="${first_label}"/>${first_label}`;
+                var checkbox_label2 = `<input id="two-checkbox" type="checkbox" value="${second_label}"/>${second_label}`;
+                var button_submit = `<button id="button_submit" onclick="submit()" >送出</button>`;
+
+                // var first_label_output = "<p><a href=/result>"+ first_label +"</a></p>";
+                // var second_label_output = "<p><a href=/result>"+ second_label +"</a></p>";
+                // var third_label_output = "<p><a href=/result>"+ third_label +"</a></p>";
+                // $.each(result["first_label"], function (index, predict) {
+                //     str += "<p>" + index + ". " + predict.label + " : " + Math.round(predict.probability * 100) + "%</p>";
+                // });
+                $("#label_options").html(checkbox_label);
+                $("#label_options").append(checkbox_label2);
+                $("#label_options").append(button_submit);
+            }).fail(function (err) {
+                alert(err.statusText);
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

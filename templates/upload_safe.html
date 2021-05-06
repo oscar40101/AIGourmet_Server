@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--導入bootstrap-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Pacifico&display=swap"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
+
+    <title>AI Gourmet</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&family=Playfair+Display&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* .test {
+            border:2px solid black;
+        } */
+
+
+        #body {
+            width: 70%;
+            margin: auto;
+            /*  background-color: #F0F0F0;*/
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Times New Roman';
+            font-weight: bold;
+            font-size: 40px;
+            color: white;
+            line-height: 20vh;
+        }
+
+        header {
+            background-color: whitesmoke;
+            width: 100%;
+            height: 10vh;
+            /*佔body(父元素)25%，用vh不用%是因為上面有browser的工具列*/
+            text-align: center;
+        }
+
+        .upload {
+            /*background-color: lightpink;*/
+            width: 50%;
+            height: 10vh;
+            float: left;
+        }
+
+        .submit {
+            /*background-color: violet;*/
+            width: 50%;
+            height: 10vh;
+            float: right;
+        }
+
+        article {
+            background-color: white;
+            width: 50%;
+            height: 90vh;
+            float: left;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            /* font-size: x-large; */
+            display: flex;
+            align-items: center;
+        }
+
+        aside {
+            background-color: #d6f5d6;
+            width: 50%;
+            height: 90vh;
+            float: right;
+            font-size: 70px;
+            color: white;
+        }
+
+        figure {
+            width: 100%;
+            height: 70vh;
+        }
+
+        .fig1 {
+            width: 400px;
+        }
+
+        .subtitle {
+            text-align: center;
+            /* padding-top: 3px; */
+            /* font-family: 'Noto Sans TC', sans-serif;
+            font-size: 15px; */
+            text-align: left;
+            width: 100%;
+            height: 20vh;
+            line-height: 20vh;
+        }
+
+        .font {
+            padding-left: 50px;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 50px;
+        }
+
+        .story {
+            line-height: 60px;
+            width: 100%;
+            height: 30vh;
+            font-size: 30px;
+        }
+
+        .jsonOutput {
+            /* background-color: pink; */
+            float: left;
+            width: 100%;
+            height: 30vh;
+        }
+
+        .output_label {
+            float: left;
+            background-color: pink;
+            width: 33%;
+            height: 20vh;
+            border: 2px solid black;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        /* 相對位置放在父元素*/
+        .absolute1 {
+            position: absolute;
+            /*   絕對位置放在子元素*/
+            top: 50%;
+            left: 5%;
+            /*用左上頂點當作移動的軸心*/
+            transform: translate(0, -50%)
+            /*調整軸心至整個物件的中點*/
+        }
+
+        .absolute2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        .absolute3 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            padding-top: 10px;
+        }
+    </style>
+    <!-- 旋轉木馬安裝 -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.carousel.min.css">
+    </link>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.theme.default.min.css">
+    </link>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/owl.carousel.min.js"></script>
+
+    <!-- 生成旋轉木馬的Function -->
+    <script type="text/javascript">
+        function CreateCarousel(item) {
+            var ans = item.value;
+            var idx = 0;
+            var image = `static/images/${ans}_${idx}.jpg`;
+            var url_path = urls[idx];
+            var name_path = names[idx];
+            ; $('.cloned .item  a #img_1').attr('src', image); // change image
+            $('.owl-item .item a #img_1').attr('src', image); // change image
+            $('.cloned .item  a #img_1').attr('alt', name_path); // change name
+            $('.owl-item .item a #img_1').attr('alt', name_path); // change name
+            $('.cloned .item  #a_1').attr('href', url_path); // change url
+            $('.owl-item .item #a_1').attr('href', url_path); // change url
+            idx = 1;
+            image = `static/images/${ans}_${idx}.jpg`;
+            url_path = urls[idx];
+            name_path = names[idx];
+            $('.cloned .item  a #img_2').attr('src', image);
+            $('.owl-item .item a #img_2').attr('src', image);
+            $('.cloned .item  a #img_2').attr('alt', name_path);
+            $('.owl-item .item a #img_2').attr('alt', name_path);
+            $('.cloned .item  #a_2').attr('href', url_path);
+            $('.owl-item .item #a_2').attr('href', url_path);
+            idx = 2;
+            url_path = urls[idx];
+            name_path = names[idx];
+            image = `static/images/${ans}_${idx}.jpg`;
+            $('.cloned .item  a #img_3').attr('src', image);
+            $('.owl-item .item a #img_3').attr('src', image);
+            $('.cloned .item  a #img_3').attr('alt', name_path);
+            $('.owl-item .item a #img_3').attr('alt', name_path);
+            $('.cloned .item  #a_3').attr('href', url_path);
+            $('.owl-item .item #a_3').attr('href', url_path);
+            idx = 3;
+            url_path = urls[idx];
+            name_path = names[idx];
+            image = `static/images/${ans}_${idx}.jpg`;
+            $('.cloned .item  a #img_4').attr('src', image);
+            $('.owl-item .item a #img_4').attr('src', image);
+            $('.cloned .item  a #img_4').attr('alt', name_path);
+            $('.owl-item .item a #img_4').attr('alt', name_path);
+            $('.cloned .item  #a_4').attr('href', url_path);
+            $('.owl-item .item #a_4').attr('href', url_path);
+            idx = 4;
+            url_path = urls[idx];
+            name_path = names[idx];
+            image = `static/images/${ans}_${idx}.jpg`;
+            $('.cloned .item  a #img_5').attr('src', image);
+            $('.owl-item .item a #img_5').attr('src', image);
+            $('.cloned .item  a #img_5').attr('alt', name_path);
+            $('.owl-item .item a #img_5').attr('alt', name_path);
+            $('.cloned .item  #a_5').attr('href', url_path);
+            $('.owl-item .item #a_5').attr('href', url_path);
+            idx = 5;
+            url_path = urls[idx];
+            name_path = names[idx];
+            image = `static/images/${ans}_${idx}.jpg`;
+            $('.cloned .item  a #img_6').attr('src', image);
+            $('.owl-item .item a #img_6').attr('src', image);
+            $('.cloned .item  a #img_6').attr('alt', name_path);
+            $('.owl-item .item a #img_6').attr('alt', name_path);
+            $('.cloned .item  #a_6').attr('href', url_path);
+            $('.owl-item .item #a_6').attr('href', url_path);
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="body" class="test">
+        <header>
+            <!--navigation bar-->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">AI Gourmet</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/about">About Us<span class="sr-only">(current)</span></a></li>
+                            <li><a href="/upload">Upload Here</a></li>
+                        </ul>
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+
+        <header id="header">
+            <form id="upload-file" method="post" enctype="multipart/form-data">
+                <div id="" class="upload relative">
+                    <!--兩個class中間是用space來區分; 1. upload  2. relative-->
+                    <input id="image" name="image" class="image absolute1 test" type="file" />
+                    <!--上傳檔案使用 "input" and "file"="選擇檔案"-->
+                </div>
+            </form>
+            <div id="" class="submit relative">
+                <button id="upload-file-btn" type="button" class="btn btn-success absolute2 test">UPLOAD HERE</button>
+                <!--"btn btn-success=bootstrap"-->
+            </div>
+        </header>
+        <article class="test">
+            <p class="story">What's left in your fridge?<br>Aren't you running out of ideas what you're going to
+                cook?<br>Then show us some pics and we will customize a meal for you!</p>
+        </article>
+        <!--article也是division-->
+        <aside class="test">
+            <figure class="test relative">
+                <img id="imgPreview" class="fig1 absolute2 img-fluid" src="static/sandwich.jpg" />
+            </figure>
+            <div class="subtitle test">
+                <p class="font">AI Gourmet</p>
+            </div>
+        </aside>
+        <!--the id has to refer to javascript-->
+        <div id="jsonOutput" class="jsonOutput">
+            <div id="first_label" class="output_label"></div>
+            <div id="second_label" class="output_label"></div>
+            <div id="third_label" class="output_label"></div>
+        </div>
+
+        <!-- 旋轉木馬樣式 -->
+        <div style="float:left" class="owl-carousel">
+
+            <div class="item">
+                <a id="a_1" target="_blank" href="https://www.apple.com/tw/"><img id="img_1"
+                        src="https://i2.wp.com/ceklog.kindel.com/wp-content/uploads/2013/02/firefox_2018-07-10_07-50-11.png" /></a>
+            </div>
+
+            <div class="item">
+                <a id="a_2" target="_blank" href="https://www.apple.com/tw/"><img id="img_2"
+                        src="https://i2.wp.com/ceklog.kindel.com/wp-content/uploads/2013/02/firefox_2018-07-10_07-50-11.png" /></a>
+            </div>
+
+            <div class="item">
+                <a id="a_3" target="_blank" href="https://www.apple.com/tw/"><img id="img_3"
+                        src="https://i2.wp.com/ceklog.kindel.com/wp-content/uploads/2013/02/firefox_2018-07-10_07-50-11.png" /></a>
+            </div>
+            <div class="item">
+                <a id="a_4" target="_blank" href="https://www.apple.com/tw/"><img id="img_4" src="../static/sandwich.jpg" /></a>
+            </div>
+            <div class="item">
+                <a id="a_5" target="_blank" href="https://www.apple.com/tw/"><img id="img_5" src="../static/sandwich.jpg" /></a>
+            </div>
+            <div class="item">
+                <a id="a_6" target="_blank" href="https://www.apple.com/tw/"><img id="img_6" src="../static/sandwich.jpg" /></a>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+        // 出現預覽圖
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgPreview').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#image").change(function () {
+            readURL(this);
+        });
+        //-------------------
+
+        // 將圖片上傳分析 回傳json改成網頁標籤
+        $('#upload-file-btn').click(function () {
+            var form_data = new FormData($('#upload-file')[0]);
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:5555/detect',
+                data: form_data,
+                contentType: false,
+                //cache: false,
+                processData: false,
+            }).done(function (result) {
+                names = result["name"];
+                urls = result["url"];
+                var first_label = result["first_label"];
+                var second_label = result["second_label"];
+                var third_label = result["third_label"];
+                var first_label_output =
+                    `<input type='button' id='first_img' onclick="CreateCarousel(first_img)" value="${first_label}"/>`;
+                var second_label_output =
+                    `<input type='button' id='second_img' onclick="CreateCarousel(second_img)" value="${second_label}"/>`;
+                var third_label_output =
+                    `<input type='button' id='third_img' onclick="CreateCarousel(third_img)" value="${third_label}"/>`;
+                $("#first_label").html(first_label_output);
+                $("#second_label").html(second_label_output);
+                $("#third_label").html(third_label_output);
+            }).fail(function (err) {
+                alert(err.statusText);
+            });
+        });
+        //-------------------
+    </script>
+    <!-- 旋轉木馬程式碼 -->
+    <script>
+        $(".owl-carousel").owlCarousel({
+            items: 3, // 一次輪播幾個項目
+            loop: true, // 循環輪播
+            margin: 10, // 與右邊圖片的距離
+            nav: false, // 導航文字
+            autoplay: true, // 自動輪播
+            autoplayTimeout: 2000, // 切換時間
+            autoplayHoverPause: true // 滑鼠經過時暫停
+        })
+    </script>
+
+
+</body>
+
+</html>

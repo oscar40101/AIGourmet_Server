@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--導入bootstrap-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&display=swap');
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=East+Sea+Dokdo&family=Playfair+Display&display=swap');
+    </style>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-5h4UG+6GOuV9qXh6HqOLwZMY4mnLPraeTrjT5v07o347pj6IkfuoASuGBhfDsp3d" crossorigin="anonymous"></script> -->
+    <title>AI Gourmet</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* .test {
+            border:2px solid black;
+        } */
+
+
+        #body {
+            width: 100%;
+            margin: auto;
+            /*  background-color: #F0F0F0;*/
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Times New Roman';
+            font-weight: bold;
+            font-size: 40px;
+            color: white;
+            line-height: 20vh;
+        }
+
+        header {
+            background-color: whitesmoke;
+            width: 100%;
+            height: 10vh;
+            /*佔body(父元素)25%，用vh不用%是因為上面有browser的工具列*/
+            text-align: center;
+        }
+
+        .upload {
+            /*background-color: lightpink;*/
+            width: 50%;
+            height: 10vh;
+            float: left;
+        }
+
+        .submit {
+            /*background-color: violet;*/
+            width: 50%;
+            height: 10vh;
+            float: right;
+        }
+
+        article {
+            background-color: white;
+            width: 50%;
+            height: 60vh;
+            float: left;
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            /* font-size: x-large; */
+            display: flex; 
+            align-items: center;
+        }
+
+        aside {
+            background-color: #d6f5d6;
+            width: 50%;
+            height: 60vh;
+            float: right;
+            font-size: 70px;
+            color: white;
+        }
+
+        .jsonOutput{
+            width:100%;
+            height:50vh;
+            float:left;
+        }
+
+        .foodOutput {
+            /* background-color: pink; */
+            margin:5px;
+            width:30%;
+            height:50vh;
+            float:left;
+        }
+
+
+        figure {
+            width:100%;
+            height:70vh;
+        }
+
+        .fig1 {
+            width:400px;
+        }
+
+        .subtitle {
+            text-align: center;
+            /* padding-top: 3px; */
+            /* font-family: 'Noto Sans TC', sans-serif;
+            font-size: 15px; */
+            text-align:left;
+            width:100%;
+            height:20vh;
+            line-height: 20vh;
+        }
+        
+        .font{
+            padding-left:50px;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 50px;
+        }
+
+        .story{
+            line-height: 60px;
+            width:100%;
+            height:30vh;
+            font-size:30px;
+            
+        }
+
+        #container {
+            width: 80%;
+            height: 50vh;
+            margin: 0px auto;
+            border: 10px #333 solid;
+        }
+        
+        #food_option {
+            width: 80%;
+            height: 10vh;
+            margin: 0px auto;
+            border: 5px orange solid;
+            font-size:30px;
+            color:black;
+        }
+
+        .relative {
+            position: relative;
+        }
+        /* 相對位置放在父元素*/
+        .absolute1 {
+            position: absolute;
+            /*   絕對位置放在子元素*/
+            top: 50%;
+            left: 5%;
+            /*用左上頂點當作移動的軸心*/
+            transform: translate(0, -50%)
+            /*調整軸心至整個物件的中點*/
+        }
+
+        .absolute2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+
+        .absolute3 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            padding-top: 10px;
+        }
+
+        .absolute4 {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-30%, -50%)
+        }
+
+        .absolute5 {
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            transform: translate(-70%, -50%)
+        }
+
+    </style>
+     <script>
+        function submit(){
+            var fruit = {};
+            if ($("#one-checkbox").prop("checked")) { // 回傳布林值
+                fruit['one'] = $("#one-checkbox").val();
+            }
+            if ($("#two-checkbox").prop("checked")) { // 回傳布林值
+                fruit['two'] = $("#two-checkbox").val();
+            }
+
+            if (fruit.length < 1) {
+                    fruit = "你沒選";
+                };
+            alert(JSON.stringify(fruit));
+
+            $.ajax({
+                url:"http://localhost:5555/search",
+                type:"post",
+                data:JSON.stringify(fruit),
+                processData:false,
+                contentType:false,
+            }).done(function (result) {
+                var names = result["names"];
+                var urls = result["urls"];
+                var first_menu = 
+                `<a id="a_1" target="_blank" href="${urls['url_0']}"><img id="menu_1" alt="${names['name_0']}" src="static/menu/0.jpg" /></a>`
+                var second_menu = 
+                `<a id="a_2" target="_blank" href="${urls['url_1']}"><img id="menu_2" alt="${names['name_1']}" src="static/menu/1.jpg" /></a>`
+                var third_menu = 
+                `<a id="a_3" target="_blank" href="${urls['url_2']}"><img id="menu_3" alt="${names['name_2']}" src="static/menu/2.jpg" /></a>`
+                $("#foodOutput1").html(first_menu)
+                $("#foodOutput2").html(second_menu)
+                $("#foodOutput3").html(third_menu)
+                alert("DB success")
+            }).fail(function (err) {
+                alert(err.statusText);
+            });
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <div id="body" class="test">
+        <header>
+            <!--navigation bar-->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">AI Gourmet</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">About Us<span class="sr-only">(current)</span></a></li>
+                            <li><a href="/upload">Upload Here</a></li>
+                            <li class="active"><a href="/webcam">Web Cam<span class="sr-only">(current)</span></a></li>
+                        </ul>
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </header>
+        
+        <header id="header" >
+            <div id="" class="submit relative">
+                <button id="webcam-start-btn" type="button" class="btn btn-success absolute4">START</button>
+                <button id="webcam-stop-btn" type="button" class="btn btn-danger absolute5">STOP</button>
+                <!--"btn btn-success=bootstrap"-->
+            </div>
+        </header>
+        <article class="test">
+            <p class="story">What's left in your fridge?<br>Aren't you running out of ideas what you're going to cook?<br>Then show us some pics and we will customize a meal for you!</p>
+        </article>
+        <!--article也是division-->
+        <aside class="test">
+            <!-- webcam -->
+            <div id="container" class="relative">
+                <img id="streamingvideo" class="absolute2" width='400' src="static/logo1.jpg"> 
+            </div>
+            <div id="food_option">
+            </div>
+            
+        </aside>
+        <!--aside也是division-->
+        <div id="jsonOutput" class="jsonOutput">
+            <div id="foodOutput1" class="foodOutput"></div>
+            <div id="foodOutput2" class="foodOutput"></div>
+            <div id="foodOutput3" class="foodOutput"></div>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+
+        $('#webcam-start-btn').click(function () {
+            $('#streamingvideo').attr('src', '/video_feed');
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:5555/yolo',
+                data: false,
+                contentType: false,
+                //cache: false,
+                processData: false,
+            }).done(function (result) {  
+            }).fail(function (err) {
+                alert(err.statusText);
+            });
+        });
+
+        $('#webcam-stop-btn').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:5555/stop',
+                data: false,
+                contentType: false,
+                //cache: false,
+                processData: false,
+            }).done(function (result) {
+                $('#streamingvideo').attr('src', 'static/logo1.jpg');
+
+                var first_label = result[0]; // 第一個分析結果
+                var second_label = result[1]; // 第二個分析結果
+
+                // alert(first_label);
+                // alert(second_label);
+
+                var checkbox_label = `<input id="one-checkbox" name="food" type="checkbox" value="${first_label}"/>${first_label}`;
+                var checkbox_label2 = `<input id="two-checkbox" name="food" type="checkbox" value="${second_label}"/>${second_label}`;
+                var button_submit = `<button id="button_submit" class="btn btn-success" onclick="submit()" >送出</button>`;
+
+                $("#food_option").html(checkbox_label); // 生成弟一個分析結果的checkbox
+                $("#food_option").append(checkbox_label2); // 生成弟二個分析結果的checkbox
+                $("#food_option").append(button_submit); // 生成submit按鈕
+            }).fail(function (err) {
+                alert(err.statusText);
+            });
+        });
+
+    </script>
+   
+</body>
+</html>
